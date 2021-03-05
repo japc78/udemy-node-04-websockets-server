@@ -11,6 +11,8 @@ class Server {
         this.io = io(this.server);
 
         this.middleWares();
+
+        this.socketsEvents();
     }
 
     middleWares() {
@@ -19,6 +21,16 @@ class Server {
 
         // Public path
         this.app.use(express.static('public'));
+    }
+
+    socketsEvents(){
+        this.io.on('connection', socket  => {
+            console.log('Client connected', socket.id);
+
+            socket.on('disconnect', ()=> {
+                console.log('Client disconnected', socket.id);
+            })
+        });
     }
 
     listen() {
