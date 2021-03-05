@@ -1,10 +1,15 @@
 const express = require('express')
 const cors = require('cors');
+const io = require('socket.io');
+const http = require('http');
 
 class Server {
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
+        this.server = http.createServer(this.app);
+        this.io = io(this.server);
+
         this.middleWares();
     }
 
@@ -17,7 +22,7 @@ class Server {
     }
 
     listen() {
-        this.app.listen(this.port, () => {
+        this.server.listen(this.port, () => {
             console.log(`Example app listening at http://localhost:${this.port}`);
         })
     }
