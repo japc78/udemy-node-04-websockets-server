@@ -16,6 +16,11 @@ socket.on('disconnect', ()=> {
     lbOff.style.display = 'inline';
 })
 
+// Evento personalizado
+socket.on('channel-test', (payload)=> {
+    console.log(payload);
+})
+
 btnSend.addEventListener('click', () => {
     const msg = txtMessage.value;
 
@@ -25,5 +30,7 @@ btnSend.addEventListener('click', () => {
         email: 'japc.testing@gmail.com',
         date: new Date().getTime()
     }
-    socket.emit('send-message', payload);
+
+    // Evento de emitir mensaje personalizado
+    socket.emit('channel-test', payload);
 })

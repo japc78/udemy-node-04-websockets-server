@@ -31,9 +31,13 @@ class Server {
                 console.log('Client disconnected', socket.id);
             })
 
-            socket.on('send-message', (payload) => {
+            socket.on('channel-test', (payload) => {
                 // console.log('Send message from server');
                 console.log(payload);
+
+                // Enviar mensajes a todos los clientes
+                // this.io.emit('channel-test', 'From Server')
+                this.io.emit('channel-test', payload);
             })
         });
     }
