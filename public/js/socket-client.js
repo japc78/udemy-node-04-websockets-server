@@ -32,5 +32,7 @@ btnSend.addEventListener('click', () => {
     }
 
     // Evento de emitir mensaje personalizado
-    socket.emit('channel-test', payload);
+    socket.emit('channel-test', payload, (id) => {
+        console.log('From Server: ' + id);
+    });
 })
