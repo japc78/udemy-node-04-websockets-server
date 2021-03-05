@@ -1,7 +1,9 @@
 const socket = io();
 
-const lbOn  = document.querySelector('#lb-online')
-const lbOff = document.querySelector('#lb-offline')
+const lbOn  = document.querySelector('#lb-online');
+const lbOff = document.querySelector('#lb-offline');
+const btnSend = document.querySelector('#btnSend');
+const txtMessage = document.querySelector('#txtMessage');
 
 // Eventos o Observables del cliente
 socket.on('connect', ()=> {
@@ -12,4 +14,16 @@ socket.on('connect', ()=> {
 socket.on('disconnect', ()=> {
     lbOn.style.display = 'none';
     lbOff.style.display = 'inline';
+})
+
+btnSend.addEventListener('click', () => {
+    const msg = txtMessage.value;
+
+    payload = {
+        msg,
+        id: 'id_testing',
+        email: 'japc.testing@gmail.com',
+        date: new Date().getTime()
+    }
+    socket.emit('send-message', payload);
 })
